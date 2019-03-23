@@ -8,6 +8,12 @@ matcherModel = {
   totalCards:0,
   currentId: 1,
 
+  selectedCard: null,
+
+  numGuesses: 0, 
+  matchedCards: 0,
+  gameStateText: "You haven't won yet, pick two cards.",
+
   init: function( size ) {
     
     this.size = size || this.size;
@@ -46,5 +52,42 @@ matcherModel = {
       this.cards[rand] = temp;
     }
   },
+
+  selectedSameCard: function( id ) {
+    return this.selectedCard && this.selectedCard.id === id;
+  },
+    
+  getCard: function( id ) {
+    for( var i = 0; i < this.cards.length ; i++ ) {
+      if( this.cards[i].id === id ) return this.cards[i];
+    }
+      
+  },
+
+  setSelectedCard(id){
+    this.selectedCard = this.getCard(id);    
+  },
+
+  checkGuess: function( id ) {
+    this.numGuesses += 2;
+    var isCorrect = false;
+    var guessedCard = this.getCard(id);
+
+    if( guessedCard && this.selectedCard && 
+          this.selectedCard.value === guessedCard.value ){
+      isCorrect = true;
+      this.matchedCards += 2;
+    }
+
+    this.selectedCard = null;
+
+    if( this.matchedCards === this.totalCards )
+      this.gameStateText = "Congratulations, you win!";
+
+    return isCorrect;
+
+  },
+    
+
     
 }
