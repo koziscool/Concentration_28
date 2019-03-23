@@ -69,7 +69,7 @@ matcherModel = {
   },
 
   checkGuess: function( id ) {
-    this.numGuesses += 2;
+    this.numGuesses++;
     var isCorrect = false;
     var guessedCard = this.getCard(id);
 
