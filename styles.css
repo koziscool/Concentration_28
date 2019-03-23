@@ -19,4 +19,10 @@
 .section div{
   font-weight: bold;
   color: white;
+  display: inline;
+}
+
+.form-container{
+  margin: 0 auto;
+  text-align: center;
 }
